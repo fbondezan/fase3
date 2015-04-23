@@ -1,10 +1,16 @@
 <!DOCTYPE html>
+<?php
+require_once 'conexaoDB.php';
+require_once 'conteudo.php';
+
+
+?>
 <html lang="pt">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> PHP - Fase 2</title>
+    <title> PHP - Fase 3</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -21,28 +27,27 @@
 
 <?php
 
-$absurl = $_SERVER['HTTP_HOST'];
-$comp = "/projetos/fase2/";
-$url = $absurl . $comp;
 
-$paginas = array("home", "empresa", "produtos", "servicos", "contato");
+$absurl = $_SERVER['HTTP_HOST'];
+$comp = "/projetos/fase3/";
+$url = $absurl . $comp;
 
 $rota = parse_url("http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 
-$path = str_replace("/projetos/fase2/", "", $rota['path']); 
+$path = str_replace("/projetos/fase3/", "", $rota['path']); 
 
 //echo $_SERVER['HTTP_HOST'] . "<br/>"; 
 //echo $_SERVER['REQUEST_URI'] . "<br/>";
 //print_r($rota) . "<br/>";
 //echo $path . "<br/>";
 //echo $url . "<br/>";
-
+/*
 if(in_array($path, $paginas) && file_exists($path.".php")){
     $pag = $path . ".php";
 } else {
     $pag = "404.php";  
     header('Página não encontrada', true, 404);
-}
+}*/
 ?>
 
 <div style="width: 960px; border:1px grey solid; margin:0 auto; ">
@@ -51,9 +56,21 @@ if(in_array($path, $paginas) && file_exists($path.".php")){
 <?php require_once("menu.php"); ?>
 
 <!-- CONTEÚDO -->
-<p> <?php require_once("$pag"); ?> </p>
+<p> 
+<?php  
+echo '<br/> caminho <br/>';
+//require_once("$pag"); 
 
-<p> <?php //if(include_once("$pag")){ echo "a";  }else{require_once("home.php"));} ?> </p>
+/**** BANCO DE DADOS ****/
+
+
+$conteudo = new Conteudo($conexao);
+$resultado = $conteudo->find($path);
+echo $resultado['conteudo'];
+
+
+/**** FIM BANCO DE DADOS ****/
+?>
 
 <?php require_once("rodape.php"); ?>
 
