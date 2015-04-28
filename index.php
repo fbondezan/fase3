@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <?php
+//CONEXAO COM BANCO DE DADOS
 require_once 'conexaoDB.php';
+//CLASSE CONTEUDO
 require_once 'conteudo.php';
 
 
@@ -10,7 +12,7 @@ require_once 'conteudo.php';
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> PHP - Fase 3</title>
+    <title> PHP - Fase 3 - BANCO DE DADOS</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -27,27 +29,11 @@ require_once 'conteudo.php';
 
 <?php
 
-
-$absurl = $_SERVER['HTTP_HOST'];
-$comp = "/projetos/fase3/";
-$url = $absurl . $comp;
-
+// URL BASE
+$url = $_SERVER['HTTP_HOST'] . "/projetos/fase3/";
 $rota = parse_url("http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-
 $path = str_replace("/projetos/fase3/", "", $rota['path']); 
 
-//echo $_SERVER['HTTP_HOST'] . "<br/>"; 
-//echo $_SERVER['REQUEST_URI'] . "<br/>";
-//print_r($rota) . "<br/>";
-//echo $path . "<br/>";
-//echo $url . "<br/>";
-/*
-if(in_array($path, $paginas) && file_exists($path.".php")){
-    $pag = $path . ".php";
-} else {
-    $pag = "404.php";  
-    header('Página não encontrada', true, 404);
-}*/
 ?>
 
 <div style="width: 960px; border:1px grey solid; margin:0 auto; ">
@@ -58,20 +44,15 @@ if(in_array($path, $paginas) && file_exists($path.".php")){
 <!-- CONTEÚDO -->
 <p> 
 <?php  
-echo '<br/> caminho <br/>';
-//require_once("$pag"); 
-
-/**** BANCO DE DADOS ****/
-
+/**** BANCO DE DADOS - CONTEUDO ****/
 
 $conteudo = new Conteudo($conexao);
 $resultado = $conteudo->find($path);
 echo $resultado['conteudo'];
 
-
-/**** FIM BANCO DE DADOS ****/
 ?>
-
+</p>
+<!-- RODAPÉ -->
 <?php require_once("rodape.php"); ?>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
