@@ -1,22 +1,22 @@
 <?php
 
-// execuções rápidas no desenvolvimento com o banco de dados
+// execuï¿½ï¿½es rï¿½pidas no desenvolvimento com o banco de dados
 // deletar tabelas e insere registro de testes
 
 require_once "conexaoDB.php";
 
-echo "#### Executando Fixture ####\n";
+echo "#### Executando Fixtures ####\n";
 
 $conn = conexaoDB();
 
-//pra ver o que está acontecendo
+//pra ver o que estï¿½ acontecendo
 echo "Removendo tabela";
-// executa uma query a partir da conexão com o banco
+// executa uma query a partir da conexï¿½o com o banco
 $conn->query("DROP TABLE IF EXISTS teste;");
 echo " - OK\n";
 
 echo "Criar tabela";
-// executa uma query a partir da conexão com o banco
+// executa uma query a partir da conexï¿½o com o banco
 $conn->query("CREATE TABLE teste (
 	id INT NOT NULL AUTO_INCREMENT,
 	nome VARCHAR(45) CHARACTER SET 'utf8' NULL,
@@ -27,7 +27,7 @@ echo " - OK\n";
 
 echo "Inserindo dados";
 for($x = 0; $x < 5; $x++){
-	$conteudo = "Conteúdo página {$x}";
+	$conteudo = "ConteÃºdo pÃ¡gina {$x}";
 	
 	$mst = $conn->prepare("INSERT INTO teste (conteudo) VALUE (:conteudo);");
 	$mst->bindParam(":conteudo", $conteudo);
@@ -39,5 +39,5 @@ for($x = 0; $x < 5; $x++){
 
 echo " - OK\n";
 
-echo "#### Concluído ####\n";
+echo "#### ConcluÃ­do ####\n"; 
 

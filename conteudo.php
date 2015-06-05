@@ -7,8 +7,8 @@ class Conteudo
 	private $id_pag;
 	
 	
-	// Método Dependence Injection
-	// Classe vai receber um objeto PDO que é a conexão com o banco de dados
+	// Mï¿½todo Dependence Injection
+	// Classe vai receber um objeto PDO que ï¿½ a conexï¿½o com o banco de dados
 	// a partir disso trabalhar com o atributo DB
 	public function __construct(\PDO $db)
 	{
@@ -18,17 +18,32 @@ class Conteudo
 	public function find($path){
 		$query = "Select * from teste where slug=:slug";
 		
+                // prepara para ser executado
 		$stmt = $this->db->prepare($query);
+                // ligar valores, ligar a variÃ¡vel ao apelido (marker) colocar na query
 		$stmt->bindValue(':slug', $path);
-		$stmt->execute();
+		// executa a query
+                $stmt->execute();
 		
 		return $stmt->fetch(\PDO::FETCH_ASSOC);
 		
 	}
+	
+        public function buscar($pal){
+		$query = "Select * from teste where conteudo LIKE '%".$pal."%' ORDER BY nome";
 		
+		$stmt = $this->db->prepare($query);
+		//$stmt->bindValue(':palavra', $pal);
+		$stmt->execute();
+                return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		
+	}
+        
 	public function conteudo(){
 		
 	}
+        
+        
 	
 
 	

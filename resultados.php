@@ -52,12 +52,34 @@ if(isset($_GET['pag'])) {$pag=$_GET['pag'];} else {$pag='home';}
 <p> 
 <?php  
 /**** BANCO DE DADOS - CONTEUDO ****/
+
+$palavra = trim($_POST['palavra']);
+
 $conteudo = new Conteudo($conexao);
-$resultado = $conteudo->find($pag);
-echo $resultado['conteudo'] . "<br/>";
-
-
+$resultado = $conteudo->buscar($palavra);
+//echo $resultado[0]['conteudo'] . "<br/>";
+$count = count($resultado);
 ?>
+
+<table style="width:100%">
+  <tr>
+    <th>ID</th>
+    <th>Nome</th> 
+    <th>Conteudo</th>
+  </tr>
+    <?php
+if(isset($count) AND $count > 0){
+    for($x = 0; $x < $count; $x++){
+        echo '<tr>';
+        echo "<td>" . $resultado[$x]['id'] . "<td>" . $resultado[$x]['nome'] . "<td>"  . $resultado[$x]['conteudo'] . "<td>"  .  "<br/>";
+        echo '</tr>';
+    }
+}
+#echo $resultado;
+?>
+    
+</table>
+
 </p>
 <!-- RODAPÉ -->
 <?php require_once("rodape.php"); ?>
