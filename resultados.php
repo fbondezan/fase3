@@ -59,6 +59,7 @@ $conteudo = new Conteudo($conexao);
 $resultado = $conteudo->buscar($palavra);
 //echo $resultado[0]['conteudo'] . "<br/>";
 $count = count($resultado);
+
 ?>
 
 <table style="width:100%">
@@ -66,12 +67,15 @@ $count = count($resultado);
     <th>ID</th>
     <th>Nome</th> 
     <th>Conteudo</th>
+    <th>Acessar Página</th>
   </tr>
     <?php
 if(isset($count) AND $count > 0){
     for($x = 0; $x < $count; $x++){
+        $url_pag = "http://54.207.98.14/projetos/fase3/index.php?pag=" . $resultado[$x]['slug'];
         echo '<tr>';
-        echo "<td>" . $resultado[$x]['id'] . "<td>" . $resultado[$x]['nome'] . "<td>"  . $resultado[$x]['conteudo'] . "<td>"  .  "<br/>";
+        echo "<td>" . $resultado[$x]['id'] . "</td><td>" . $resultado[$x]['nome'] . "</td><td>"  . $resultado[$x]['conteudo'] . "</td><td>"  .
+                "<a href='$url_pag'> LINK </a> </td> <br/>";
         echo '</tr>';
     }
 }

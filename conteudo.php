@@ -30,6 +30,13 @@ class Conteudo
 	}
 	
         public function buscar($pal){
+                /* TENTATIVA DE BIND VALUE, NÃO FUNCIONOU
+                $busca = filter_input(INPUT_POST, 'busca');
+                $stmt = $this->db->prepare("SELECT * FROM teste WHERE conteudo LIKE :busca");
+                $stmt->bindValue(':busca', "%{$busca}%");
+                $stmt->execute();
+                return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                */
 		$query = "Select * from teste where conteudo LIKE '%".$pal."%' ORDER BY nome";
 		
 		$stmt = $this->db->prepare($query);
