@@ -5,6 +5,7 @@ class Conteudo
 	private $db;
 	//ID, Nome e Email do cliente
 	private $id_pag;
+        private $conteudo;
 	
 	
 	// M�todo Dependence Injection
@@ -26,7 +27,6 @@ class Conteudo
                 $stmt->execute();
 		
 		return $stmt->fetch(\PDO::FETCH_ASSOC);
-		
 	}
 	
         public function buscar($pal){
@@ -43,11 +43,40 @@ class Conteudo
 		//$stmt->bindValue(':palavra', $pal);
 		$stmt->execute();
                 return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-		
 	}
         
-	public function conteudo(){
-		
+        public function editar()
+	{
+		//statement
+		$query = "Update teste set conteudo=:conteudo Where id=:id";
+		$stmt = $this->db->prepare($query);
+		$stmt->bindValue(':id', $this->getId());
+		$stmt->bindValue(':conteudo', $this->getConteudo());
+		if($stmt->execute()){
+			return true;
+		}
+	}
+        
+        public function setId($id)
+	{
+		$this->id_pag = $id;
+		return $this;
+	}
+	
+	public function getId()
+	{
+		return $this->id_pag;
+	}
+        
+        public function setConteudo($conteudo)
+	{
+		$this->conteudo = $conteudo;
+		return $this;
+	}
+	
+	public function getConteudo()
+	{
+		return $this->conteudo;
 	}
         
         

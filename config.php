@@ -3,7 +3,7 @@
 return array(
 	'db'=> array(
 		'host' => 'localhost',
-		'dbname' => 'fase3',
+		'dbname' => 'fase4',
 		'user' => 'root',
 		'password' => '1meapmu8sw'
 	)
